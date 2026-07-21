@@ -21,9 +21,9 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync ios
 
-      - name: Install CocoaPods dependencies
-        working-directory: ios/App
-        run: pod install
+      # Capacitor 8's iOS template uses Swift Package Manager (CapApp-SPM),
+      # not CocoaPods — there's no Podfile, so no `pod install` step needed.
+      # xcodebuild resolves the SPM dependencies itself during build.
 
       # Unsigned build for the iOS Simulator only — proves the app compiles
       # and runs, but Simulator builds can't be installed on a real iPhone.
@@ -33,7 +33,7 @@ jobs:
       - name: Build for iOS Simulator (smoke test)
         working-directory: ios/App
         run: |
-          xcodebuild -workspace App.xcworkspace -scheme App \
+          xcodebuild -project App.xcodeproj -scheme App \
             -destination 'generic/platform=iOS Simulator' \
             -configuration Debug build
 
@@ -72,7 +72,7 @@ jobs:
         env:
           IOS_TEAM_ID: ${{ secrets.IOS_TEAM_ID }}
         run: |
-          xcodebuild -workspace App.xcworkspace -scheme App \
+          xcodebuild -project App.xcodeproj -scheme App \
             -configuration Release -archivePath build/App.xcarchive archive \
             DEVELOPMENT_TEAM="$IOS_TEAM_ID"
           cat > ExportOptions.plist <<PLIST
