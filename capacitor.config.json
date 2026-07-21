@@ -1,0 +1,17 @@
+{
+  "appId": "rw.acplrwa.mis",
+  "appName": "ACPLRWA MIS",
+  "webDir": "www",
+  "server": {
+    "url": "https://acplrwa.rw/gate/",
+    "cleartext": false,
+    "androidScheme": "https",
+    "allowNavigation": [
+      "acplrwa.rw",
+      "*.acplrwa.rw"
+    ]
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}

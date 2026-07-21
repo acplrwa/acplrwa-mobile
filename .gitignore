@@ -1,0 +1,22 @@
+node_modules/
+
+# Android
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/*.keystore
+android/*.jks
+*.keystore
+*.jks
+
+# iOS
+ios/App/Pods/
+ios/App/build/
+ios/App/App.xcworkspace/xcuserdata/
+ios/App/*.xcworkspace/xcuserdata/
+DerivedData/
+*.ipa
+
+# misc
+.DS_Store
