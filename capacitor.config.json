@@ -1,6 +1,6 @@
 {
   "appId": "rw.acplrwa.mis",
-  "appName": "ACPLRWA MIS",
+  "appName": "ACPLRWA",
   "webDir": "www",
   "server": {
     "url": "https://acplrwa.rw/gate/",
