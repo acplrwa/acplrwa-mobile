@@ -26,6 +26,20 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync android
 
+      # Use a stable debug keystore (checked in as a secret) instead of
+      # Gradle's auto-generated one-off key. Without this, every CI run
+      # signs with a different key, and existing users can never install
+      # an update over the old app — Android refuses it as a signature
+      # mismatch until they uninstall first. This makes every debug build
+      # install cleanly over the previous one, like a normal app update.
+      - name: Install stable debug keystore
+        if: ${{ env.ANDROID_DEBUG_KEYSTORE_BASE64 != '' }}
+        env:
+          ANDROID_DEBUG_KEYSTORE_BASE64: ${{ secrets.ANDROID_DEBUG_KEYSTORE_BASE64 }}
+        run: |
+          mkdir -p ~/.android
+          echo "$ANDROID_DEBUG_KEYSTORE_BASE64" | base64 -d > ~/.android/debug.keystore
+
       - name: Build debug APK (installable via direct link, no account needed)
         working-directory: android
         run: ./gradlew assembleDebug
