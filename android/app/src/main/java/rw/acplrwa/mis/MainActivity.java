@@ -56,8 +56,10 @@ public class MainActivity extends BridgeActivity implements NfcAdapter.ReaderCal
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
 
+    // public, not protected: Capacitor's BridgeActivity declares these as
+    // public, and Java forbids reducing an overridden method's visibility.
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         if (nfcAdapter != null) {
@@ -78,7 +80,7 @@ public class MainActivity extends BridgeActivity implements NfcAdapter.ReaderCal
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         // Release the radio so other apps (and the lock screen) work normally.
         if (nfcAdapter != null) {
