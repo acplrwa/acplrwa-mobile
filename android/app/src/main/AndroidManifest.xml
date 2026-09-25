@@ -32,4 +32,15 @@
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Card tapping. NFC is a normal permission, so it is granted at install
+         time and there is no runtime prompt to handle. -->
+    <uses-permission android:name="android.permission.NFC" />
+
+    <!-- required="false" matters: with "true", Google Play hides the app from
+         every handset without an NFC radio. The app must stay installable on
+         those phones and simply not offer tapping. -->
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="false" />
 </manifest>
